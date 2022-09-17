@@ -55,10 +55,8 @@ useEffect (() => {
       })
       resetTurn()
     } else {
-
+      setTimeout (()=> resetTurn(), 1000)
       
-      resetTurn()
-
     }
   }
 
@@ -83,7 +81,9 @@ const resetTurn = () => {
             {cards.map(card => (
             <SingleCard key={card.id} 
             card = {card} 
-            handleChoice={handleChoice} />
+            handleChoice={handleChoice}  
+            flipped = {card === choiceOne || card === choiceTwo || card.matched}  />
+           
             ))}
          </div> 
     </div>
