@@ -25,6 +25,8 @@ const shuffleCards = () => {
   .sort(()=> Math.random() - 0.5)
   .map((card) => ({...card, id: Math.random()}))
 
+  setChoiceOne(null)
+  setChoiceTwo(null)
   setCards(shuffledCard)
   setTurns(0)  
 }
@@ -38,7 +40,6 @@ choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
 // conpare 2 selected card
 
 useEffect (() => {
-  
 
   if (choiceOne && choiceTwo) {
     setDisabled(true)
@@ -55,7 +56,9 @@ useEffect (() => {
               }
         })
       })
+
       resetTurn()
+
     } else {
       setTimeout (()=> resetTurn(), 1000)
       
@@ -75,7 +78,15 @@ const resetTurn = () => {
   setDisabled(false)
 }
 
-  return (
+// start a new automatically 
+
+useEffect (() => {  
+  
+  shuffleCards()
+
+}, [])  
+
+return (
     <div className="App">
      <h1>Magic Match</h1>
      <button onClick={shuffleCards}>New Game</button>
@@ -90,6 +101,7 @@ const resetTurn = () => {
            
             ))}
          </div> 
+         <p>Turns: {turns}</p>
     </div>
   );
 }
